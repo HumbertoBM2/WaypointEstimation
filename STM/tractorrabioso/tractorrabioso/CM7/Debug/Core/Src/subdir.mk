@@ -6,9 +6,11 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/MY_NRF24.c \
+../Core/Src/WayPointNotify.c \
 ../Core/Src/main.c \
 ../Core/Src/mpu6050.c \
 ../Core/Src/myprintf.c \
+../Core/Src/steering.c \
 ../Core/Src/stm32h7xx_hal_msp.c \
 ../Core/Src/stm32h7xx_it.c \
 ../Core/Src/syscalls.c \
@@ -16,9 +18,11 @@ C_SRCS += \
 
 OBJS += \
 ./Core/Src/MY_NRF24.o \
+./Core/Src/WayPointNotify.o \
 ./Core/Src/main.o \
 ./Core/Src/mpu6050.o \
 ./Core/Src/myprintf.o \
+./Core/Src/steering.o \
 ./Core/Src/stm32h7xx_hal_msp.o \
 ./Core/Src/stm32h7xx_it.o \
 ./Core/Src/syscalls.o \
@@ -26,9 +30,11 @@ OBJS += \
 
 C_DEPS += \
 ./Core/Src/MY_NRF24.d \
+./Core/Src/WayPointNotify.d \
 ./Core/Src/main.d \
 ./Core/Src/mpu6050.d \
 ./Core/Src/myprintf.d \
+./Core/Src/steering.d \
 ./Core/Src/stm32h7xx_hal_msp.d \
 ./Core/Src/stm32h7xx_it.d \
 ./Core/Src/syscalls.d \
@@ -42,7 +48,7 @@ Core/Src/%.o Core/Src/%.su: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/MY_NRF24.d ./Core/Src/MY_NRF24.o ./Core/Src/MY_NRF24.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/mpu6050.d ./Core/Src/mpu6050.o ./Core/Src/mpu6050.su ./Core/Src/myprintf.d ./Core/Src/myprintf.o ./Core/Src/myprintf.su ./Core/Src/stm32h7xx_hal_msp.d ./Core/Src/stm32h7xx_hal_msp.o ./Core/Src/stm32h7xx_hal_msp.su ./Core/Src/stm32h7xx_it.d ./Core/Src/stm32h7xx_it.o ./Core/Src/stm32h7xx_it.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su
+	-$(RM) ./Core/Src/MY_NRF24.d ./Core/Src/MY_NRF24.o ./Core/Src/MY_NRF24.su ./Core/Src/WayPointNotify.d ./Core/Src/WayPointNotify.o ./Core/Src/WayPointNotify.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/mpu6050.d ./Core/Src/mpu6050.o ./Core/Src/mpu6050.su ./Core/Src/myprintf.d ./Core/Src/myprintf.o ./Core/Src/myprintf.su ./Core/Src/steering.d ./Core/Src/steering.o ./Core/Src/steering.su ./Core/Src/stm32h7xx_hal_msp.d ./Core/Src/stm32h7xx_hal_msp.o ./Core/Src/stm32h7xx_hal_msp.su ./Core/Src/stm32h7xx_it.d ./Core/Src/stm32h7xx_it.o ./Core/Src/stm32h7xx_it.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su
 
 .PHONY: clean-Core-2f-Src
 

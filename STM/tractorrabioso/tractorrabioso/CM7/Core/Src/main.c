@@ -21,8 +21,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <MPU6050.h>
 #include "MY_NRF24.h"
 #include "myprintf.h"
+#include "steering.h"
+#include "WayPointNotify.h"
+
 
 /* USER CODE END Includes */
 
@@ -85,7 +89,7 @@ void Turning_SetAngle(float);
 uint64_t RxpipeAddrs = 0x11223344AA;
 char myRxData[32];
 char myAckPayload[32] = "Ack by STMF7!";
-
+volatile uint64_t cntMilisec = 0;
 
 /* USER CODE END 0 */
 
@@ -97,6 +101,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 	float setpoint;
+
   /* USER CODE END 1 */
 /* USER CODE BEGIN Boot_Mode_Sequence_0 */
   int32_t timeout;
@@ -155,6 +160,9 @@ Error_Handler();
   HAL_TIM_PWM_Start(&htim16, TIM_CHANNEL_1);
 
 
+
+
+
   if (HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1) != HAL_OK) {
 	  Error_Handler();
   }
@@ -209,7 +217,6 @@ Error_Handler();
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   //mpu6050_init(&hi2c4, AD0_LOW, AFSR_4G, GFSR_500DPS, 0.98, 0.004);
-  printf("Herllo /n");
 
   // Calibrar el acelerometro
   //MPU_calibrateAccel(&hi2c4, 1000);
