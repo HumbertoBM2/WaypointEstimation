@@ -1,10 +1,17 @@
-21:56:46 **** Incremental Build of configuration Debug for project tractorrabioso_CM4 ****
+17:53:49 **** Incremental Build of configuration Debug for project tractorrabioso_CM4 ****
 make -j20 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32H755xx -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "tractorrabioso_CM4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\goma4\Desktop\Folder\TEC\CintoSemAgo-Dic2024\DesignofAdvancedEmbeddedSystems-TE2004B.602\Modulo4\ExperimentWirelessInterfacing\STM\tractorrabioso\tractorrabioso\CM4\STM32H755ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="tractorrabioso_CM4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: tractorrabioso_CM4.elf
+ 
 arm-none-eabi-size   tractorrabioso_CM4.elf 
+arm-none-eabi-objdump -h -S  tractorrabioso_CM4.elf  > "tractorrabioso_CM4.list"
    text	   data	    bss	    dec	    hex	filename
-  10872	     24	   1648	  12544	   3100	tractorrabioso_CM4.elf
+   4320	     24	   1568	   5912	   1718	tractorrabioso_CM4.elf
 Finished building: default.size.stdout
  
+Finished building: tractorrabioso_CM4.list
+ 
 
-21:56:46 Build Finished. 0 errors, 0 warnings. (took 234ms)
+17:53:52 Build Finished. 0 errors, 0 warnings. (took 2s.721ms)
 

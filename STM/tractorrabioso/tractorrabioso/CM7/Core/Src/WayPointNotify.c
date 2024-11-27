@@ -102,5 +102,3 @@ uint8_t updateNextWaypoint() {
     }
     return(retval);
 }
-
-

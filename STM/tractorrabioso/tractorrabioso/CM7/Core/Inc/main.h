@@ -67,8 +67,6 @@ void Error_Handler(void);
 #define B1_GPIO_Port GPIOC
 #define LD1_Pin GPIO_PIN_0
 #define LD1_GPIO_Port GPIOB
-#define LD3_Pin GPIO_PIN_14
-#define LD3_GPIO_Port GPIOB
 #define STLINK_RX_Pin GPIO_PIN_8
 #define STLINK_RX_GPIO_Port GPIOD
 #define STLINK_TX_Pin GPIO_PIN_9
@@ -77,7 +75,10 @@ void Error_Handler(void);
 #define nrf24_CE_GPIO_Port GPIOC
 #define nrf24_CSN_Pin GPIO_PIN_7
 #define nrf24_CSN_GPIO_Port GPIOC
-void   MX_TIM16_Init(void);
+#define DEBUG_SWDIO_Pin GPIO_PIN_13
+#define DEBUG_SWDIO_GPIO_Port GPIOA
+#define DEBUG_SWCLK_Pin GPIO_PIN_14
+#define DEBUG_SWCLK_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
