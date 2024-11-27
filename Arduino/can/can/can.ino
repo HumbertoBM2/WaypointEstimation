@@ -5,9 +5,9 @@ long unsigned int rxId;
 unsigned char len = 0;
 unsigned char rxBuf[8];
 char msgString[128];
-byte data[8] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07};
+byte data[8] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x08};
 
-#define CAN0_INT 2
+#define CAN0_INT 4
 MCP_CAN CAN0(10);
 
 void setup() {
@@ -33,7 +33,7 @@ void loop() {
     Serial.println("Error Sending Message...");
   }
   
-  delay(100);
+  delay(1000);
 
   // Receiving message from STM
   if (!digitalRead(CAN0_INT)) {

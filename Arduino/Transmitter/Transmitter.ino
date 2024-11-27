@@ -27,7 +27,9 @@ const uint64_t address = 0x11223344AA;
 
 void setup() {
     //Wireless  
+    
     Serial.begin(9600);                   // Initialize UART communication for the serial monitor
+    
     radio.begin();                        // Initialize the RF24 radio module
     radio.openWritingPipe(address);       // Open a writing pipe using the defined address
     radio.setPALevel(RF24_PA_MAX);       // Set Power Amplifier level to max (0dB)
@@ -51,8 +53,9 @@ void setup() {
 
 void loop() {
       // Wireless
+      
     // Message to send
-    const char text[] = "Team #3: rabits";   
+    const char text[] = "Team#3: rabiosos";   
 
     // &tesxt = the message to send, sizeof(text) = the size of the message to send
     bool success = radio.write(&text, sizeof(text));  
@@ -68,7 +71,9 @@ void loop() {
     // Wait for 1 second before sending the next message
     delay(1000);        
 
-
+    
+  
+  /*
       // Sending message to STM
   byte sndStat = CAN0.sendMsgBuf(0x100, 0, 8, data);
   if (sndStat == CAN_OK) {
@@ -77,7 +82,7 @@ void loop() {
     Serial.println("Error Sending Message...");
   }
   
-  delay(100);
+  delay(1000);
 
     // CAM
   // Receiving message from STM
@@ -98,7 +103,10 @@ void loop() {
     
     Serial.println();
     Serial.println("Message Received from STM");
-  }                              
+
+    
+  }
+  */                       
     
 }
 
