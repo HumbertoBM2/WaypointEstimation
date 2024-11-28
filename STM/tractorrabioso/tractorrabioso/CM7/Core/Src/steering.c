@@ -13,14 +13,14 @@ TIM_HandleTypeDef HTimServo;
 
 enum State {START, PathFwd1, PathCurv, PathFwd2, OFF};   //define speed constant values
 static enum State CurrState = START; // initialize state machine to START
-static const uint32_t SpdFwd1 = 1025;
-static const uint32_t SpdCurv = 1025;
-static const uint32_t AngleFwd = 60;
-static const uint32_t AngleCurv = 140;
+static const uint32_t SpdFwd1 = 1020;
+static const uint32_t SpdCurv = 1020;
+static const uint32_t AngleFwd = 42;
+static const uint32_t AngleCurv = 103;
 
-static const uint32_t intFwd = 2000;
-static const uint32_t intFwd1 = 2000;
-static const uint32_t intCurv = 3000;
+static const uint32_t intFwd = 1700;
+static const uint32_t intFwd1 = 1700;
+static const uint32_t intCurv = 6000;
 
 static uint32_t prevTim  = 0;
 static uint32_t stateId = 0;
@@ -72,6 +72,7 @@ switch (CurrState) {
          CurrState = OFF;
          stateId = 4;
          setServoAngle(AngleFwd);   // Set the target steering angle
+         setEscSpeed(SpdFwd1);
          stopCar();
       }
       else {
@@ -190,30 +191,32 @@ void alignCarToAngle(uint16_t targetAngle) {
 
 void hardCodedPath(uint16_t forwardSpeed, uint16_t turningSpeed, uint16_t forwardTime, uint16_t turningTime, uint16_t turningAngle) {
 	stopCar();
-	setServoAngle(60);
+	setServoAngle(42);
 	HAL_Delay(2000);
+	setServoAngle(42);   // Set the target steering angle
+	setEscSpeed(forwardSpeed);   // Low forward speed
+	HAL_Delay(forwardTime);      // Adjust the delay as needed for small movements
+	stopCar();
+	//setServoAngle(60);   // Set the target steering angle
+    //setEscSpeed(forwardSpeed);   // Low forward speed
+    //HAL_Delay(forwardTime);      // Adjust the delay as needed for small movements
 
+    //setServoAngle(60 + turningAngle/2);   // Set the target steering angle
+    //HAL_Delay(300);
+    //setServoAngle(60 + turningAngle/3);   // Set the target steering angle
+    //HAL_Delay(300);
+    //setServoAngle(60 + turningAngle/4);   // Set the target steering angle
+    //HAL_Delay(300);
+    //setServoAngle(60 + turningAngle/5);   // Set the target steering angle
+    //HAL_Delay(300);
+    //setServoAngle(turningAngle);   // Set the target steering angle
+    //HAL_Delay(300);
+    //setEscSpeed(turningSpeed);   // Low forward speed
+    //HAL_Delay(turningTime);
 
-	setServoAngle(60);   // Set the target steering angle
-    setEscSpeed(forwardSpeed);   // Low forward speed
-    HAL_Delay(forwardTime);      // Adjust the delay as needed for small movements
-
-    setServoAngle(60 + turningAngle/2);   // Set the target steering angle
-    HAL_Delay(300);
-    setServoAngle(60 + turningAngle/3);   // Set the target steering angle
-    HAL_Delay(300);
-    setServoAngle(60 + turningAngle/4);   // Set the target steering angle
-    HAL_Delay(300);
-    setServoAngle(60 + turningAngle/5);   // Set the target steering angle
-    HAL_Delay(300);
-    setServoAngle(turningAngle);   // Set the target steering angle
-    HAL_Delay(300);
-    setEscSpeed(turningSpeed);   // Low forward speed
-    HAL_Delay(turningTime);
-
-    setServoAngle(60);   // Set the target steering angle
-    setEscSpeed(forwardSpeed);   // Low forward speed
-    HAL_Delay(forwardTime);
+    //setServoAngle(60);   // Set the target steering angle
+    //setEscSpeed(forwardSpeed);   // Low forward speed
+    //HAL_Delay(forwardTime);
 
 
     stopCar();           // Stop to check the position

@@ -72,7 +72,7 @@ FDCAN_TxHeaderTypeDef TxHeader;
 FDCAN_RxHeaderTypeDef RxHeader;
 uint8_t TxData[8] = {0x10, 0x34, 0x54, 0x76, 0x98, 0x00, 0x11, 0x22};
 uint8_t RxData[8];
-uint8_t direction;
+uint8_t numTurns;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -176,7 +176,7 @@ Error_Handler();
   nrf24_DebugUART_Init(huart3);
   NRF24_openReadingPipe(1, RxpipeAddrs);
   NRF24_setAutoAck(false);
-  NRF24_setChannel(52);
+  NRF24_setChannel(60);
   NRF24_setPayloadSize(32);
   NRF24_setDataRate(RF24_2MBPS);
 
@@ -221,15 +221,20 @@ Error_Handler();
 
   while (1) {
 
-	 /* com
+	/* com
 	 if (counter == 0){
-
-		 hardCodedPath(1025, 1025, 2000, 2000, 140);
+		 HAL_GPIO_TogglePin(LD1_GPIO_Port,LD1_Pin);
+		 HAL_Delay(100);
+		 HAL_GPIO_TogglePin(LD1_GPIO_Port,LD1_Pin);
+		 hardCodedPath(1025, 1025, 1300, 2000, 140);
+		 HAL_GPIO_TogglePin(LD1_GPIO_Port,LD1_Pin);
+		 HAL_Delay(100);
+		 HAL_GPIO_TogglePin(LD1_GPIO_Port,LD1_Pin);
 		 counter++;
 	 } else {
 		 stopCar();
 	 }
-	 com */
+	 com*/
 
 
 	stateHardCode = PathHardCodeUpdateState(cntMilisec);
@@ -248,7 +253,7 @@ Error_Handler();
 };
  */
 
-/*	switch(stateHardCode) {
+	switch(stateHardCode) {
 	case 1:
 		wpCurrX = 50.0;
 	    wpCurrY = 30.0;
@@ -266,7 +271,7 @@ Error_Handler();
     	wpCurrY = 120.0;
     	break;
 	}
-*/
+
 
 
 	stateWaypointNotify = WaypointUpdateState(wpCurrX, wpCurrY);
@@ -294,7 +299,7 @@ Error_Handler();
 
 	if((cntMilisec - prevTimIMU) >= intTimIMU) {                    // Send this at a one second interval.
 	    prevTimIMU = cntMilisec;
-	    //MPU_readProcessedData(&hi2c4);
+	    MPU_readProcessedData(&hi2c4);
 	}
 
 
@@ -306,17 +311,17 @@ Error_Handler();
 
 	if((cntMilisec - prevTimCAN) >= intTimCAN) {                    // Send this at a one second interval.
 	    prevTimCAN = cntMilisec;
-    	//while (HAL_FDCAN_GetRxMessage(&hfdcan1, FDCAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK);
+    	//if (HAL_FDCAN_GetRxMessage(&hfdcan1, FDCAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK);
     	//HAL_Delay(10);
     	valueCAN.valueInt[0] = RxData[0];
     	valueCAN.valueInt[1] = RxData[1];
     	valueCAN.valueInt[2] = RxData[2];
     	valueCAN.valueInt[3] = RxData[3];
-    	direction = RxData[4];
-    	//printf("\n\rCAN ID: %lx", RxHeader.Identifier);
+    	numTurns = RxData[4];
+    	printf("\n\rCAN ID: %lx", RxHeader.Identifier);
     	//printf("\n\rAdvWheel360: %f  ", valueCAN.valuefloat);
     	//if (direction == true)
-    	  //printf("direction: forward");
+    	printf("\n\rNumber of turns: %d",numTurns );
     	//else
     	  //printf("direction: backwards");
 	}
@@ -326,6 +331,7 @@ Error_Handler();
 	    prevTimLED = cntMilisec;
 	    HAL_GPIO_TogglePin(LD1_GPIO_Port,LD1_Pin);
 	}
+
   }
   /* USER CODE END 3 */
 }
